@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/listCode.dir/src/example.cpp.o"
-  "CMakeFiles/listCode.dir/src/example.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.
