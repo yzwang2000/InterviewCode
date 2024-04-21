@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <cmath>
+#include <algorithm>
 
 namespace Deque{
     // 整体思路是对的, 但是还能够改进一下；
@@ -357,6 +358,112 @@ namespace Deque{
             }
 
             return str2int(tk_stack.top());
+        }
+    }
+
+    namespace Solution06{
+        // 这种写法也是对的, 但是时间复杂度不是最少的
+        // std::vector<int> Solution::maxSlidingWindow(std::vector<int>& nums, int k)
+        // {
+        //     int max_value = -1e4, count_max_value = 0;  // 统计一个滑块内的最大值和最大值的次数
+         
+        //     // 对于 k >= nums.size() 的情况
+        //     if(k >= nums.size())    
+        //     {
+        //         std::sort(nums.begin(), nums.end());
+        //         return std::vector<int> {nums.back()};
+        //     }
+        //     else
+        //     {
+        //         std::vector<int> result; result.reserve(nums.size()-k);
+
+        //         // 根据第一个结果初始化值
+        //         std::vector<int> tmp {nums.begin(), nums.begin() + k};
+        //         std::sort(tmp.begin(), tmp.end());
+        //         max_value = tmp.back();
+        //         result.push_back(max_value);
+        //         for(auto iter=tmp.rbegin(); iter!=tmp.rend(); ++iter) 
+        //         {
+        //             if(*iter==max_value)
+        //             {
+        //                 ++count_max_value;
+        //             }
+        //             else
+        //             {
+        //                 break;
+        //             }
+        //         }
+
+        //         for(int i=1; i<=nums.size()-k; ++i)
+        //         {
+        //             if(nums[i-1]!=max_value) 
+        //             {
+        //                 if(nums[i+k-1] < max_value)
+        //                 {
+        //                     result.push_back(max_value);
+        //                 }
+        //                 else if(nums[i+k-1] == max_value)
+        //                 {
+        //                     ++count_max_value;
+        //                     result.push_back(max_value);
+        //                 }
+        //                 else
+        //                 {
+        //                     max_value = nums[i+k-1];
+        //                     count_max_value = 1;
+        //                     result.push_back(max_value);
+        //                 }
+        //             }
+        //             else
+        //             {
+        //                 if(--count_max_value == 0)
+        //                 {
+        //                     tmp.assign(nums.begin()+i, nums.begin()+i+k);
+        //                     std::sort(tmp.begin(), tmp.end());
+        //                     max_value = tmp.back();
+        //                     result.push_back(max_value);
+        //                     for(auto iter=tmp.rbegin(); iter!=tmp.rend(); ++iter) 
+        //                     {
+        //                         if(*iter==max_value)
+        //                         {
+        //                             ++count_max_value;
+        //                         }
+        //                         else
+        //                         {
+        //                             break;
+        //                         }
+        //                     }
+        //                 }
+        //                 else{
+        //                     result.push_back(max_value);
+        //                 }
+        //             }
+        //         }
+        //         return result;
+        //     }
+        // }
+
+        std::vector<int> Solution::maxSlidingWindow(std::vector<int>& nums, int k)
+        {
+            std::vector<int> result;
+            MyDeque mydeq;
+
+            // 初始化单调队列
+            for(int i=0; i<k; ++i)
+            {
+                mydeq.push(nums[i]);
+            }
+            result.push_back(mydeq.get_max_value());
+
+            for(int i=1; i<=static_cast<int>(nums.size())-k; ++i)
+            {
+                // std::cout << std::boolalpha << (i<(nums.size()-k-1)) << std::endl;
+                mydeq.pop(nums[i-1]);
+                mydeq.push(nums[i+k-1]);
+                result.push_back(mydeq.get_max_value());
+            }
+
+            return result;
         }
     }
 }

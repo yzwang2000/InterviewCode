@@ -25,12 +25,13 @@ namespace std
 
 
 int main(int argc, char ** argv){
-    // std::vector<std::string> tokens {"2", "1", "+", "3", "*"};
-    // std::vector<std::string> tokens {"4", "13", "5", "/", "+"};
-    // std::vector<std::string> tokens {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
-    std::vector<std::string> tokens {"3", "-4", "+"};
-    int result = Deque::Solution05::Solution::evalRPN(tokens);
-    std::cout << std::boolalpha << result << std::endl;
+    // std::vector<int> nums {1, 3, -1, -3, 5, 3, 6, 7};
+    std::vector<int> nums {1};
+    int k = 1;
+
+    std::vector<int> result = Deque::Solution06::Solution::maxSlidingWindow(nums, k);
+    std::cout << result << std::endl;
+
     return 0;
 }
 

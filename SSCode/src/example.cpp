@@ -1,4 +1,5 @@
 #include <SSCode/example.hpp>
+#include <algorithm>
 
 namespace SSCode{
     namespace Solution01{
