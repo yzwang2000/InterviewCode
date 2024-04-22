@@ -5,7 +5,9 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <cmath>
+#include <unordered_map> 
 #include <algorithm>
+
 
 namespace Deque{
     // 整体思路是对的, 但是还能够改进一下；
@@ -463,6 +465,65 @@ namespace Deque{
                 result.push_back(mydeq.get_max_value());
             }
 
+            return result;
+        }
+    }
+
+    namespace Solution07{
+        // 这个思路是错误的, C++ 中的 map 和 set 中自定义的排序函数, 都必须都能传入连个 key 做为参数(不能改成value 或者其他).
+        // 创建一个字典, 字典中 pair 排序的方式是依据值的降序。当字典长度超过 k 的时候, 就将最后的抹去。
+        // std::vector<int> Solution::topKFrequent(std::vector<int>&nums, int k)
+        // {
+        //     auto descend_value = [](const std::pair<int, int> a, const std::pair<int, int> b){
+        //         return a.second > b.second;
+        //     };
+
+        //     std::map<int, int, decltype(descend_value)> MyDict;
+        //     for(int i=0; i<static_cast<int>(nums.size())-1; ++i)
+        //     {
+        //         ++MyDict[nums[i]];
+        //         while(MyDict.size() > k)
+        //         {
+        //             MyDict.erase(MyDict.end());
+        //         }
+        //     }
+
+        //     std::vector<int> result; result.reserve(MyDict.size());
+        //     for(auto MyPair:MyDict)
+        //     {
+        //         result.push_back(MyPair.first);
+        //     }
+
+        //     return result;
+        // }
+
+        // 优先级队列根据元素来设置函数指定优先级
+        // 其实这种做法也能够被 set + map 的方法替代
+        std::vector<int> Solution::topKFrequent(std::vector<int>&nums, int k)
+        {
+            std::unordered_map<int, int> myDict;
+            for(int i=0; i<static_cast<int>(nums.size()); ++i)
+            {
+                ++myDict[nums[i]];
+            }
+
+            std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, Func> prio_que;
+            for(auto iter = myDict.begin(); iter!=myDict.end(); ++iter)
+            {
+                prio_que.push(*iter);
+                while(prio_que.size() > k) 
+                {
+                    prio_que.pop();  // 如果元素个数超过 k 就剔除多余的部分
+                }
+            }
+
+            std::vector<int> result; result.resize(k);
+            for(int i=static_cast<int>(result.size())-1; i>=0; --i)
+            {
+                result[i] = prio_que.top().first;
+                prio_que.pop();
+            }
+            
             return result;
         }
     }

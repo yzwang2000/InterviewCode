@@ -94,4 +94,20 @@ namespace Deque{
             static std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k);
         };
     }
+
+    namespace Solution07{
+        class Solution{
+        public:
+            class Func{
+            public:
+                bool operator()(const std::pair<int, int>& a, const std::pair<int, int>& b)
+                {
+                    return a.second > b.second;
+                }
+            };
+        
+        public:
+            static std::vector<int> topKFrequent(std::vector<int>& nums, int k);
+        };
+    }
 }

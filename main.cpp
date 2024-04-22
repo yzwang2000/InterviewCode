@@ -25,11 +25,10 @@ namespace std
 
 
 int main(int argc, char ** argv){
-    // std::vector<int> nums {1, 3, -1, -3, 5, 3, 6, 7};
     std::vector<int> nums {1};
     int k = 1;
 
-    std::vector<int> result = Deque::Solution06::Solution::maxSlidingWindow(nums, k);
+    std::vector<int> result = Deque::Solution07::Solution::topKFrequent(nums, k);
     std::cout << result << std::endl;
 
     return 0;
