@@ -32,6 +32,7 @@ add_subdirectory(ListCode)
 add_subdirectory(HashCode)
 add_subdirectory(SSCode)
 add_subdirectory(Deque)
+add_subdirectory(BinaryTree)
 
 add_executable(main main.cpp)
-target_link_libraries(main PUBLIC arrayCode listCode hashCode OpenMP::OpenMP_CXX ssCode deque)
+target_link_libraries(main PUBLIC arrayCode listCode hashCode OpenMP::OpenMP_CXX ssCode deque binaryTree)

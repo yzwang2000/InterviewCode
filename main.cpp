@@ -8,6 +8,8 @@
 #include <HashCode/example.hpp>
 #include <SSCode/example.hpp>
 #include <Deque/example.hpp>
+#include <BinaryTree/example.hpp>
+#include <unordered_map>
 
 namespace std
 {
@@ -23,14 +25,16 @@ namespace std
     }
 }
 
-
 int main(int argc, char ** argv){
-    std::vector<int> nums {1};
-    int k = 1;
 
-    std::vector<int> result = Deque::Solution07::Solution::topKFrequent(nums, k);
-    std::cout << result << std::endl;
-
+    BinaryTree::TreeNode node1 = BinaryTree::TreeNode {1};
+    BinaryTree::TreeNode node2 = BinaryTree::TreeNode {2};
+    BinaryTree::TreeNode node3 = BinaryTree::TreeNode {3};
+    BinaryTree::TreeNode* root = &node1;
+    root->right = &node2;
+    root->right->left = &node3;
+    BinaryTree::Solution06::Solution::levelOrderBottom(root);
+    
     return 0;
 }
 
