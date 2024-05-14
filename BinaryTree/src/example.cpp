@@ -399,4 +399,60 @@ namespace BinaryTree{
             return nodeNum;
         }
     }
+
+    namespace Solution16{
+        int Solution::findBottomLeftValue(TreeNode* root)
+        {
+            std::queue<TreeNode *> que;  // 使用层序遍历
+            int BottomLeftValue {0};
+            if(!root) return 0;
+            
+            que.push(root);
+            while (!que.empty())
+            {
+                int layerSize = que.size();
+                for(int i=0; i<layerSize; ++i)
+                {
+                    TreeNode *tmp = que.front();
+                    if(i==0) BottomLeftValue = tmp->val;
+                    que.pop();
+                    if(tmp->left) que.push(tmp->left);
+                    if(tmp->right) que.push(tmp->right);
+                }
+            }
+
+            return BottomLeftValue;
+        }
+    }
+
+    namespace Solution17{
+        std::vector<int> Solution::PathSum(TreeNode* root)
+        {
+            if(root==nullptr) return std::vector<int> {};
+            else if(root->right==nullptr && root->left==nullptr) return std::vector<int> {root->val};
+
+            std::vector<int> leftPath = PathSum(root->left);
+            std::vector<int> rightPath = PathSum(root->right);
+
+            leftPath.insert(leftPath.end(), rightPath.begin(), rightPath.end());
+            for(int& val:leftPath) val+=root->val;
+
+            return leftPath;
+        }
+
+        bool Solution::hasPathSum(TreeNode*root, int targetSum)
+        {
+            std::vector<int> paths = PathSum(root);
+            bool hasPath = false;
+            for(const int& ele: paths)
+            {
+                if(ele==targetSum) 
+                {
+                    hasPath = true;
+                    break;
+                }
+            }
+            return hasPath;
+        }
+    }
 }

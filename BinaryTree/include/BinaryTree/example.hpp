@@ -136,4 +136,17 @@ namespace BinaryTree {
             static int countNodes(TreeNode* root);
         };
     }
+
+    namespace Solution16{
+        class Solution{
+            static int findBottomLeftValue(TreeNode* root);
+        };
+    }
+
+    namespace Solution17{
+        class Solution{
+            static std::vector<int> PathSum(TreeNode* root);
+            static bool hasPathSum(TreeNode* root, int targetSum);
+        };
+    }
 }

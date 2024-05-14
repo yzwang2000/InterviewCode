@@ -10,6 +10,8 @@
 #include <Deque/example.hpp>
 #include <BinaryTree/example.hpp>
 #include <unordered_map>
+#include <algorithm>
+#include <unordered_set>
 
 namespace std
 {
@@ -27,13 +29,10 @@ namespace std
 
 int main(int argc, char ** argv){
 
-    BinaryTree::TreeNode node1 = BinaryTree::TreeNode {1};
-    BinaryTree::TreeNode node2 = BinaryTree::TreeNode {2};
-    BinaryTree::TreeNode node3 = BinaryTree::TreeNode {3};
-    BinaryTree::TreeNode* root = &node1;
-    root->right = &node2;
-    root->right->left = &node3;
-    BinaryTree::Solution06::Solution::levelOrderBottom(root);
+    std::vector<int> okk {1, 2, 3, 4};
+    auto max_iter = std::max_element(okk.begin(), okk.end());
+    std::vector<int> {okk.begin(), max_iter};
+    std::unordered_set<int> ook;
     
     return 0;
 }
